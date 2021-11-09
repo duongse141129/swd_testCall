@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "71355061912",
+    "project_id": "advisory-lawyer",
+    "storage_bucket": "advisory-lawyer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71355061912:android:8cf6793083d7ac78c422ed",
+        "android_client_info": {
+          "package_name": "com.example.advisories_lawyer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71355061912-cda0vfgc2um91e09kgescsevbt2tm65u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.advisories_lawyer",
+            "certificate_hash": "781ba0bb9cca50a32e4c2a3c02d223ee523397f9"
+          }
+        },
+        {
+          "client_id": "71355061912-mpjb059rdqnmn0cm3mdf7fp82gfocsu2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.advisories_lawyer",
+            "certificate_hash": "df56976ec71f496a0621203ff301da2c1e979b0f"
+          }
+        },
+        {
+          "client_id": "71355061912-vc9lckoesj4il5aev952b3ncai862sjk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.advisories_lawyer",
+            "certificate_hash": "0f13697540348795a6d8bb247e7330ae4a1f0ddb"
+          }
+        },
+        {
+          "client_id": "71355061912-7icu8bptfn0emnqoaidhealpknkuru3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACsfrtSDiEndGv1GCnIl_VYX4Pr4ltY4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71355061912-7icu8bptfn0emnqoaidhealpknkuru3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
