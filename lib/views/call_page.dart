@@ -11,6 +11,7 @@ class CallPage extends StatefulWidget {
   CallPage({this.channelName, Key? key}) : super(key: key);
   var channelName;
 
+
   @override
   _CallPageState createState() => _CallPageState();
 }
@@ -43,10 +44,13 @@ class _CallPageState extends State<CallPage> {
       });
       return;
     }
-
+    
     await _initAgoraRtcEngine();
      _addAgoraEventHandlers();
-    await _engine.joinChannel(null, widget.channelName, null, 0);
+     
+    var concu = widget.channelName.substring(1, widget.channelName.length - 1);
+    print(concu);
+    await _engine.joinChannel(null, concu, null, 0);
   }
 
   Future<void> _initAgoraRtcEngine() async {
@@ -268,6 +272,11 @@ class _CallPageState extends State<CallPage> {
   }
 
   void _onCallEnd(BuildContext context) {
+    _engine.leaveChannel();
     Navigator.pop(context);
   }
+  
+
 }
+
+
