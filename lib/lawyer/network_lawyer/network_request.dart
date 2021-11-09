@@ -186,7 +186,7 @@ class NetworkRequest {
   }
 
   static Future<List<BookingDTO>> fetachBooking({int page = 1}) async {
-    final response = await http.get(Uri.parse('https://104.215.186.78/api/v1/bookings?LawyerId=8&pageIndex=1&pageSize=10'));
+    final response = await http.get(Uri.parse('https://104.215.186.78/api/v1/bookings?LawyerId=${InforUser.getIdUser()}&pageIndex=1&pageSize=50'));
     if (response.statusCode == 200) {
       print("connect dc r");
       return compute(parseBooking, response.body);

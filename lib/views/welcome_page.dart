@@ -5,9 +5,12 @@ import 'package:advisories_lawyer/views/lawyer_page.dart';
 import 'package:advisories_lawyer/views/logged_in.dart';
 import 'package:advisories_lawyer/views/login_page.dart';
 import 'package:advisories_lawyer/views/main_customer.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+
+import 'call_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class _WelcomePageState extends State<WelcomePage> {
   void initState() {
     super.initState();
     futureUsers = getUsers();
+    setupInteractedMessage();
   }
 
   @override
@@ -38,6 +42,33 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+    print('');
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+  
+  void _handleMessage(RemoteMessage message) {
+    var channelName = message.data['channel'];
+    if (channelName == "") {
+      
+    }else {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CallPage(channelName : channelName)));
+    }
   }
 
   FutureBuilder<Users> buildFutureBuilder() {
