@@ -47,8 +47,13 @@ class _CallPageState extends State<CallPage> {
     
     await _initAgoraRtcEngine();
      _addAgoraEventHandlers();
-     
-    var concu = widget.channelName.substring(1, widget.channelName.length - 1);
+    var concu = "";
+    if(widget.channelName.toString().contains("\"")){
+      concu = widget.channelName.substring(1, widget.channelName.length - 1);
+    }else{
+      concu = widget.channelName;
+    }
+  
     print(concu);
     await _engine.joinChannel(null, concu, null, 0);
   }
