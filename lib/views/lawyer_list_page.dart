@@ -18,7 +18,8 @@ class LawyerListPage extends StatefulWidget {
   const LawyerListPage(this.categoryID, this.customerCase);
 
   @override
-  _LawyerPageState createState() => _LawyerPageState(categoryID: categoryID, customerCase: customerCase);
+  _LawyerPageState createState() =>
+      _LawyerPageState(categoryID: categoryID, customerCase: customerCase);
 }
 
 class _LawyerPageState extends State<LawyerListPage> {
@@ -58,12 +59,13 @@ class _LawyerPageState extends State<LawyerListPage> {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: InkWell(
                             onTap: () {
-                              
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => LawyerListSchedule(
-                                          lawyer[index].id, customerCase)));
+                                          lawyer[index].id,
+                                          lawyer[index].name,
+                                          customerCase)));
                             },
                             child: Card(
                               child: ListTile(
@@ -75,7 +77,7 @@ class _LawyerPageState extends State<LawyerListPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      lawyer[index].name,
+                                      '${lawyer[index].name}',
                                       style: TextStyle(
                                           fontSize: 20, color: Colors.green),
                                     ),
@@ -83,7 +85,12 @@ class _LawyerPageState extends State<LawyerListPage> {
                                       crossAxisAlignment:
                                           WrapCrossAlignment.center,
                                       children: [
-                                        Text(lawyer[index].description,
+                                        Icon(
+                                          Icons.school,
+                                          color: Colors.blue,
+                                          size: 20,
+                                        ),
+                                        Text(' ' + lawyer[index].description,
                                             style: TextStyle(
                                               color: Colors.black,
                                             )),
@@ -93,29 +100,43 @@ class _LawyerPageState extends State<LawyerListPage> {
                                       crossAxisAlignment:
                                           WrapCrossAlignment.center,
                                       children: [
+                                        Icon(
+                                          Icons.phone,
+                                          color: Colors.blue,
+                                          size: 20,
+                                        ),
+                                        Text(' ${lawyer[index].phoneNumber}',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                            )),
+                                      ],
+                                    ),
+                                    Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.web,
+                                          color: Colors.blue,
+                                          size: 20,
+                                        ),
+                                        Text(' ${lawyer[index].website}',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                            )),
+                                      ],
+                                    ),
+                                    Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.person,
+                                          color: Colors.blue,
+                                          size: 20,
+                                        ),
                                         Text(
-                                            'Phone: ${lawyer[index].phoneNumber}',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                            )),
-                                      ],
-                                    ),
-                                    Wrap(
-                                      crossAxisAlignment:
-                                          WrapCrossAlignment.center,
-                                      children: [
-                                        Text(
-                                            'Website: ${lawyer[index].website}',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                            )),
-                                      ],
-                                    ),
-                                    Wrap(
-                                      crossAxisAlignment:
-                                          WrapCrossAlignment.center,
-                                      children: [
-                                        Text(lawyer[index].sex,
+                                            ' ${lawyer[index].sex == "Femal" ? "Nam" : "Nữ"}',
                                             style: TextStyle(
                                               color: Colors.black,
                                             )),

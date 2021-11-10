@@ -95,7 +95,7 @@ class LoginPage extends StatelessWidget {
                   FontAwesomeIcons.google,
                   color: Colors.red,
                 ),
-                label: Text('Sign Up with google'))),
+                label: Text('Login with google'))),
       ),
     );
 

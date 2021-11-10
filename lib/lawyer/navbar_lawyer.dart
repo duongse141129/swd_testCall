@@ -1,3 +1,4 @@
+import 'package:advisories_lawyer/lawyer/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,10 @@ class LawyerNavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Profile'),
-            onTap: () => {},
+            onTap: () => {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileLawyerPage()))
+            },
           ),
           ListTile(
             leading: Icon(Icons.notifications),

@@ -61,13 +61,15 @@ class _WelcomePageState extends State<WelcomePage> {
     // Stream listener
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
   }
-  
+
   void _handleMessage(RemoteMessage message) {
     var channelName = message.data['channel'];
     if (channelName == "") {
-      
-    }else {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => CallPage(channelName : channelName)));
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CallPage(channelName: channelName)));
     }
   }
 
@@ -78,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
         if (snapshot.hasData) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text("Welcome Back",
                   style: TextStyle(fontSize: 40, color: Colors.yellow)),
@@ -97,46 +99,68 @@ class _WelcomePageState extends State<WelcomePage> {
               SizedBox(
                 height: 20,
               ),
-              TextButton(
-                  onPressed: () {
-                    if (snapshot.data!.role == "customer") {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
+              Image.asset(
+                'welcome.png',
+                fit: BoxFit.cover,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                      color: Colors.yellowAccent,
+                      onPressed: () {
+                        if (snapshot.data!.role == "customer") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return CustomerMain();
+                                },
+                                settings: RouteSettings(
+                                  arguments: snapshot.data!.id,
+                                ),
+                              ));
+                        } else if (snapshot.data!.role == "lawyer") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return LawyerMain();
+                                },
+                                settings: RouteSettings(
+                                  arguments: snapshot.data!.id,
+                                ),
+                              ));
+                        } else {
+                          Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return CustomerMain();
+                              return LoginPage();
                             },
-                            settings: RouteSettings(
-                              arguments: snapshot.data!.id,
-                            ),
                           ));
-                    } else if (snapshot.data!.role == "lawyer") {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return LawyerMain();
-                            },
-                            settings: RouteSettings(
-                              arguments: snapshot.data!.id,
-                            ),
-                          ));
-                    } else {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return LoginPage();
-                        },
-                      ));
-                    }
-                  },
-                  child: Text('continue')),
-              TextButton(
-                  onPressed: () {
-                    final provider = Provider.of<GoogleSignInProvider>(context,
-                        listen: false);
-                    provider.logout();
-                  },
-                  child: Text('Logout'))
+                        }
+                      },
+                      child: Text(
+                        'Continue',
+                        style: TextStyle(fontSize: 25, color: Colors.black),
+                      )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  RaisedButton(
+                      color: Colors.yellowAccent,
+                      onPressed: () {
+                        final provider = Provider.of<GoogleSignInProvider>(
+                            context,
+                            listen: false);
+                        provider.logout();
+                      },
+                      child: Text('Logout', style: TextStyle(fontSize: 25)))
+                ],
+              ),
             ],
           );
         } else if (snapshot.hasError) {

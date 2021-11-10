@@ -19,7 +19,7 @@ class DocPage extends StatefulWidget {
 class _DocPageState extends State<DocPage> {
   _DocPageState({required this.categoryID});
   late Future<List<Doc>> futureDoc;
-  final int categoryID ;
+  final int categoryID;
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,7 @@ class _DocPageState extends State<DocPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Document'),
+        title: const Text('Tài liệu'),
         backgroundColor: Colors.purple[400],
       ),
       body: Center(
@@ -50,7 +50,6 @@ class _DocPageState extends State<DocPage> {
                             builder: (context) => CustomerCasePage(),
                             settings: RouteSettings(
                               arguments: doc[index],
-                            
                             ),
                           ));
                     },
@@ -59,7 +58,7 @@ class _DocPageState extends State<DocPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Câu hỏi: ' + doc[index].name,
+                            'Câu hỏi: ' + doc[index].name + "\n",
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
@@ -67,6 +66,18 @@ class _DocPageState extends State<DocPage> {
                             doc[index].description + "\n",
                             style: TextStyle(fontSize: 20),
                           ),
+                          Row(
+                            children: [
+                              TextButton(
+                                  onPressed: () {},
+                                  child: Text('Chi tiết vấn đề của bạn')),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: Colors.blue,
+                                size: 20,
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),

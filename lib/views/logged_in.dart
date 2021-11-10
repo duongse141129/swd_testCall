@@ -109,7 +109,7 @@ class LoggedIn extends StatelessWidget {
                                           'Document List',
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 25,
+                                              fontSize: 24,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ],
@@ -133,7 +133,7 @@ class LoggedIn extends StatelessWidget {
                                           'Lawyer List',
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 25,
+                                              fontSize: 24,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ],

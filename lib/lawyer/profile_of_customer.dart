@@ -17,26 +17,28 @@ class _ProfileCustomerState extends State<ProfileCustomer> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    NetworkRequest.fetachProfileUser(widget.customerID).then((dataFromSever){
+    NetworkRequest.fetachProfileUser(widget.customerID).then((dataFromSever) {
       setState(() {
         customerDTO = dataFromSever;
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile Customer ${widget.customerID}"),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.purple[400],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             height: 5,
           ),
           Text(
-            '${customerDTO?.name}',
+            'Tên khách hàng: ${customerDTO?.name}',
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
           ),
@@ -44,7 +46,7 @@ class _ProfileCustomerState extends State<ProfileCustomer> {
             height: 5,
           ),
           Text(
-            '${customerDTO?.address}',
+            'Địa chỉ: ${customerDTO?.address}',
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
           ),
@@ -52,7 +54,7 @@ class _ProfileCustomerState extends State<ProfileCustomer> {
             height: 5,
           ),
           Text(
-            '${customerDTO?.location}',
+            'Thành phố: ${customerDTO?.location}',
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
           ),
@@ -60,7 +62,7 @@ class _ProfileCustomerState extends State<ProfileCustomer> {
             height: 5,
           ),
           Text(
-            '${customerDTO?.phoneNumber}',
+            'Số điện thoại: ${customerDTO?.phoneNumber}',
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
           ),
@@ -68,11 +70,10 @@ class _ProfileCustomerState extends State<ProfileCustomer> {
             height: 5,
           ),
           Text(
-            '${customerDTO?.sex == 0 ? "nu" : "nam"}',
+            'Giới tính: ${customerDTO?.sex == 0 ? "nữ" : "nam"}',
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
           ),
-          
         ],
       ),
     );

@@ -105,8 +105,7 @@ class _AddSlotState extends State<AddSlotTask> {
                         color: Colors.grey,
                       ),
                     ),
-                  )
-                  ),
+                  )),
                 ],
               ),
               Container(
@@ -137,13 +136,13 @@ class _AddSlotState extends State<AddSlotTask> {
               ),
               RaisedButton(
                 onPressed: () {
-                  _startTime=ChangeTime12To24(_startTime);
-                  _endTime=ChangeTime12To24(_endTime);
+                  _startTime = ChangeTime12To24(_startTime);
+                  _endTime = ChangeTime12To24(_endTime);
                   final df = new DateFormat('dd/MM/yyyy');
-                  String dateTo= df.format(_selectedDate);
-                  print("Date to "+dateTo);
-                  String sTimeString =dateTo +" " +_startTime;
-                  String eTimeString = dateTo+" " +_endTime;
+                  String dateTo = df.format(_selectedDate);
+                  print("Date to " + dateTo);
+                  String sTimeString = dateTo + " " + _startTime;
+                  String eTimeString = dateTo + " " + _endTime;
                   SlotDTO slotDTO = SlotDTO(
                       id: 0,
                       bookingId: 0,
@@ -156,7 +155,6 @@ class _AddSlotState extends State<AddSlotTask> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LawyerMain()));
                 },
-                
                 child: Text(
                   "Create Task",
                   style: TextStyle(color: Colors.white),
@@ -176,21 +174,22 @@ class _AddSlotState extends State<AddSlotTask> {
     if (apM.compareTo("PM") == 0) {
       int hour = int.parse(timeToChange.split(':')[0]) + 12;
       //int mini = int.parse(timeToChange.split(' ')[0].split(':')[1]);
-      String minu= timeToChange.split(' ')[0];
-      minu=minu.split(':')[1];
+      String minu = timeToChange.split(' ')[0];
+      minu = minu.split(':')[1];
       print("Gio chieu " + hour.toString());
-      result=hour.toString()+":"+minu.toString();
+      result = hour.toString() + ":" + minu.toString();
       return result;
     } else {
-      print("Gio sang "+timeToChange);
-      result=timeToChange.split(' ')[0];
+      print("Gio sang " + timeToChange);
+      result = timeToChange.split(' ')[0];
       return result;
     }
   }
+
   String themSoKhong(int ym) {
     String result;
-    if(ym<10){
-      result="0"+ym.toString();
+    if (ym < 10) {
+      result = "0" + ym.toString();
       return result;
     }
     return ym.toString();

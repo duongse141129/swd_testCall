@@ -1,10 +1,10 @@
 import 'package:advisories_lawyer/lawyer/infor_user.dart';
 import 'package:advisories_lawyer/models/booking.dart';
 import 'package:advisories_lawyer/models/network_lawyer/network_request.dart';
+import 'package:advisories_lawyer/views/call_page.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 
 class CustomerSchedule extends StatefulWidget {
   @override
@@ -17,7 +17,8 @@ class _SheduleState extends State<CustomerSchedule> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    NetworkRequest.fetachBookingOfCustomer(InforUser.getIdUser()).then((dataFromSever) {
+    NetworkRequest.fetachBookingOfCustomer(InforUser.getIdUser())
+        .then((dataFromSever) {
       setState(() {
         bookingData = dataFromSever;
       });
@@ -102,15 +103,22 @@ class _SheduleState extends State<CustomerSchedule> {
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),
-             
-
                               InkWell(
                                 child: Icon(
                                   Icons.call,
                                   color: Colors.green,
                                 ),
-                                onTap: () {
-                                  
+                                onTap: () async {
+                                  var chanelNameToCall =
+                                      await NetworkRequest.getChanelNameToCall(
+                                          bookingData[index].id,
+                                          InforUser.getRoleUser());
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => CallPage(
+                                              channelName: chanelNameToCall)));
                                 },
                               )
                             ],

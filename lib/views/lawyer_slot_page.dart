@@ -17,17 +17,23 @@ import 'package:table_calendar/table_calendar.dart';
 
 class LawyerListSchedule extends StatefulWidget {
   late int lawyerID;
+  late String lawyerName;
   late CustomerCase customerCase;
 
-  LawyerListSchedule(this.lawyerID,this.customerCase);
+  LawyerListSchedule(this.lawyerID, this.lawyerName, this.customerCase);
   @override
-  _LawyerListSheduleState createState() =>
-      _LawyerListSheduleState(lawyerID: lawyerID,customerCase: customerCase);
+  _LawyerListSheduleState createState() => _LawyerListSheduleState(
+      lawyerID: lawyerID, lawyerName: lawyerName, customerCase: customerCase);
 }
 
 class _LawyerListSheduleState extends State<LawyerListSchedule> {
-  _LawyerListSheduleState({required this.lawyerID, required this.customerCase});
+  _LawyerListSheduleState({
+    required this.lawyerID,
+    required this.lawyerName,
+    required this.customerCase,
+  });
   late int lawyerID;
+  late String lawyerName;
   late CustomerCase customerCase;
   List<SlotDTO> slotData = <SlotDTO>[];
   @override
@@ -61,7 +67,7 @@ class _LawyerListSheduleState extends State<LawyerListSchedule> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Today",
+                        "Danh sách các slot",
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -141,7 +147,8 @@ class _LawyerListSheduleState extends State<LawyerListSchedule> {
                           if (slotData[index].bookingId == 0) {
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return BookingPage(lawyerID,customerCase,slotData[index]);
+                                return BookingPage(lawyerID, lawyerName,
+                                    customerCase, slotData[index]);
                               },
                             ));
                           } else {

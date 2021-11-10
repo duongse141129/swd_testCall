@@ -28,7 +28,7 @@ class _CategoryPageState extends State<CategoryCusPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Categories"),
+        title: Text("Các lĩnh vực"),
         backgroundColor: Colors.purple[400],
       ),
       body: Column(

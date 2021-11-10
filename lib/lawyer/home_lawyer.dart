@@ -157,8 +157,10 @@ class _HomePageState extends State<LawyerHomePage> {
             onTap: () {
               switch (name) {
                 case "Profile of customer":
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ProfileBooking()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileBooking()));
                   break;
                 case "Document":
                   Navigator.push(context,

@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 
 class CustomerCasePage extends StatefulWidget {
   const CustomerCasePage({Key? key}) : super(key: key);
@@ -43,27 +44,35 @@ class _CustomerCasePageState extends State<CustomerCasePage> {
     final doc = ModalRoute.of(context)!.settings.arguments as Doc;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customer case'),
+        title: Text('Vấn đề của khách hàng'),
         backgroundColor: Colors.purple[400],
         centerTitle: true,
       ),
       body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: ListView(
               children: [
-                Text(
-                  'Câu hỏi: ' + doc.name,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.all(8.0),
-                  child: (_futureCustomerCase == null)
-                      ? buildColumn()
-                      : buildFutureBuilder(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Câu hỏi: ' + doc.name,
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.all(8.0),
+                      child: (_futureCustomerCase == null)
+                          ? buildColumn()
+                          : buildFutureBuilder(),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -74,26 +83,48 @@ class _CustomerCasePageState extends State<CustomerCasePage> {
   Column buildColumn() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          "Chủ đề",
+          style: TextStyle(fontSize: 30),
+        ),
         TextField(
           controller: _controllerTitle,
           decoration: const InputDecoration(
-              border: OutlineInputBorder(), hintText: 'Tiêu đề'),
+              border: OutlineInputBorder(), hintText: 'Mời bạn nhập chủ đề'),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          "Nội dung",
+          style: TextStyle(fontSize: 30),
         ),
         TextField(
+          maxLines: 6,
           controller: _controllerDes,
           decoration: const InputDecoration(
-              border: OutlineInputBorder(), hintText: 'Vẫn đề của bạn'),
+              border: OutlineInputBorder(),
+              hintText: 'Mời bạn nhập chi tiết vấn đề mà bạn muốn giải quyết'),
         ),
-        ElevatedButton(
-          onPressed: () {
-            setState(() {
-              _futureCustomerCase =
-                  createCustomerCase(_controllerTitle.text, _controllerDes.text);
-            });
-          },
-          child: const Text('Submit'),
-        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _futureCustomerCase = createCustomerCase(
+                      _controllerTitle.text, _controllerDes.text);
+                });
+              },
+              child: const Text('Submit'),
+            ),
+          ],
+        )
       ],
     );
   }
@@ -108,15 +139,59 @@ class _CustomerCasePageState extends State<CustomerCasePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Title: " + snapshot.data!.name,
-                style: TextStyle(fontSize: 20),
+              Card(
+                child: Container(
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Chủ đề: ",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        '  - ${snapshot.data!.name}',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              Text("Your Problem: " + snapshot.data!.description,
-                  style: TextStyle(fontSize: 20)),
+              SizedBox(
+                height: 10,
+              ),
+              Card(
+                child: Container(
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nội dung: ",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        '  - ${snapshot.data!.description}',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               RaisedButton(
+                color: Colors.purple.shade400,
                 onPressed: () {
-                  CustomerCase cusCase=CustomerCase(id: 0,name: snapshot.data!.name,description: snapshot.data!.description);
+                  CustomerCase cusCase = CustomerCase(
+                      id: 0,
+                      name: snapshot.data!.name,
+                      description: snapshot.data!.description);
 
                   //print("CUS"+customerCaseDTO.id.toString());
 
@@ -126,7 +201,10 @@ class _CustomerCasePageState extends State<CustomerCasePage> {
                           builder: (context) =>
                               LawyerListPage(doc.category_id, cusCase)));
                 },
-                child: Text("Chọn Luật sư"),
+                child: Text(
+                  "Chọn Luật sư",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           );
