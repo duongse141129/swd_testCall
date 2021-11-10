@@ -128,27 +128,23 @@ class _SheduleState extends State<LawyerSchedule> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
+                                '${"Date: "+slotData[index].startAt.substring(0,10)}',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+                              Text(
+                                '${"Time: "+slotData[index].startAt.substring(11,16)}  - ${slotData[index].endAt.substring(11,16)}',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+      
+                              Text(
+                                '${"Price: "+slotData[index].price.toString()}',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+                              Text(
                                 '${slotData[index].id}',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black),
-                              ),
-                              Text(
-                                '${slotData[index].lawyerId}',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black),
-                              ),
-                              Text(
-                                '${slotData[index].price}',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black),
-                              ),
-                              Text(
-                                '${slotData[index].startAt}',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black),
-                              ),
-                              Text(
-                                '${slotData[index].endAt}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),

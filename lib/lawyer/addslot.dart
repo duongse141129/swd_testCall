@@ -182,6 +182,10 @@ class _AddSlotState extends State<AddSlotTask> {
     } else {
       print("Gio sang " + timeToChange);
       result = timeToChange.split(' ')[0];
+      int hour = int.parse(timeToChange.split(':')[0]);
+      if(hour < 10){
+        return "0"+result;
+      }
       return result;
     }
   }

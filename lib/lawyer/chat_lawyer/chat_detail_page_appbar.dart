@@ -6,10 +6,6 @@ class ChatDetailPageAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
       elevation: 0,
       automaticallyImplyLeading: false,
       backgroundColor: Color(0xff14142b),

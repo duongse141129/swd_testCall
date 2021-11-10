@@ -235,7 +235,7 @@ class NetworkRequest {
         'Accept': 'application/json',
         'Authorization': 'Bearer $idToken',
       },
-      body: jsonEncode(<String, dynamic>{"id": 18, "booking_id": 33}),
+      body: jsonEncode(<String, dynamic>{"id": idSlot, "booking_id": bookingID}),
     );
 
     String body = response.body;

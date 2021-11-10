@@ -33,13 +33,26 @@ class _ProfileOfCustomerCaseState extends State<ProfileOfCustomerCase> {
         title: Text("Profile Customer ${widget.customerCaseID}"),
         backgroundColor: Colors.blue,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text(customerCase!.name),
-            Text(customerCase!.description),
-          ],
-        ),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            'Title: ${customerCase?.name}',
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            'Description: ${customerCase?.description}',
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+
+        ],
       ),
       
     );
