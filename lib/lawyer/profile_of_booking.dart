@@ -5,6 +5,7 @@ import 'package:advisories_lawyer/lawyer/profile_of_customer.dart';
 import 'package:advisories_lawyer/lawyer/profile_of_customercase.dart';
 
 import 'package:advisories_lawyer/provider/google_sign_in.dart';
+import 'package:advisories_lawyer/views/call_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfileBooking extends StatefulWidget {
@@ -142,16 +143,16 @@ class _ProfileBooking extends State<ProfileBooking> {
                                   Icons.call,
                                   color: Colors.green,
                                 ),
-                                onTap: () {
+                                onTap: () async {
                                   var chanelNameToCall =
-                                      NetworkRequest.getChanelNameToCall(
+                                      await NetworkRequest.getChanelNameToCall(
                                           bookingData[index].id,
                                           InforUser.getRoleUser());
 
-                                  /*Navigator.push(
+                                  Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ProfileOfCustomerCase( 2)));*/
+                                      builder: (context) => CallPage(channelName: chanelNameToCall,)));
                                 },
                               )
                             ],
