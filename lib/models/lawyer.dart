@@ -18,6 +18,20 @@ Future<List<Lawyer>> fetchLawyer(int categoryID) async {
   }
 }
 
+Future<List<Lawyer>> fetchAllLawyer() async {
+  final response = await http.get(Uri.parse(
+      'https://104.215.186.78/api/v1/lawyers?&page_index=1&page_size=20'));
+
+  print(response);
+
+  if (response.statusCode == 200) {
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((lawyer) => Lawyer.fromJson(lawyer)).toList();
+  } else {
+    throw Exception('Fail to load');
+  }
+}
+
 class Lawyer {
   final int id;
   final String name;

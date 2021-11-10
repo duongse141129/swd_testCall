@@ -23,9 +23,9 @@ class _MyHomePageState extends State<CustomerMain> {
   Widget appBarTitle = Text('Advisory Lawyer');
   final List pages = [
     LoggedIn(),
-    null,
+    LawyerPhoneBook(),
     CustomerSchedule(),
-    null,
+    LawyerSettings(),
   ];
 
   /*final tabs = [

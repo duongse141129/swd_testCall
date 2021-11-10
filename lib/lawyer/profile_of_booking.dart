@@ -137,6 +137,23 @@ class _ProfileBooking extends State<ProfileBooking> {
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
+                              InkWell(
+                                child: Icon(
+                                  Icons.call,
+                                  color: Colors.green,
+                                ),
+                                onTap: () {
+                                  var chanelNameToCall =
+                                      NetworkRequest.getChanelNameToCall(
+                                          bookingData[index].id,
+                                          InforUser.getRoleUser());
+
+                                  /*Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ProfileOfCustomerCase( 2)));*/
+                                },
+                              )
                             ],
                           ),
                         ),

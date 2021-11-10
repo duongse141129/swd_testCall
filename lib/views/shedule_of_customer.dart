@@ -89,17 +89,17 @@ class _SheduleState extends State<CustomerSchedule> {
                                     fontSize: 16, color: Colors.black),
                               ),
                               Text(
-                                '${bookingData[index].lawyerId} : ${bookingData[index].lawyerName} ',
+                                'Lawyer ID ${bookingData[index].lawyerId} : ${bookingData[index].lawyerName} ',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),
                               Text(
-                                '${bookingData[index].totalPrice}',
+                                'Price: ${bookingData[index].totalPrice}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),
                               Text(
-                                '${bookingData[index].bookingDate}',
+                                'Ngày đặt: ${bookingData[index].bookingDate.substring(0, 10)}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),

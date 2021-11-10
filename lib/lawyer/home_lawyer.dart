@@ -66,25 +66,29 @@ class _HomePageState extends State<LawyerHomePage> {
   );
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+          color: Colors.black87,
+          image: DecorationImage(
+              alignment: Alignment.center,
+              image: AssetImage("assets/background.png"),
+              fit: BoxFit.cover)),
       padding: EdgeInsets.all(30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 10,
-          ),
           Text(
             "Hello Laywer ${user.displayName},",
             style: TextStyle(
                 fontSize: 21,
+                color: Colors.white,
                 fontWeight: FontWeight.w800,
                 fontFamily: 'avenir'),
           ),
           SizedBox(
-            height: 20,
+            height: 140,
           ),
           Container(
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               color: Color(0xfff1f3f6),
@@ -137,10 +141,8 @@ class _HomePageState extends State<LawyerHomePage> {
               crossAxisCount: 2,
               childAspectRatio: 0.7,
               children: [
-                serviceWidget("sendMoney", "Profile of customer"),
-                serviceWidget("receiveMoney", "Document"),
-                serviceWidget("phone", "Contact"),
-                serviceWidget("electricity", "News"),
+                serviceWidget("assets/profile.jpg", "Profile of customer"),
+                serviceWidget("assets/document.png", "Document"),
               ],
             ),
           )
@@ -176,7 +178,7 @@ class _HomePageState extends State<LawyerHomePage> {
             child: Container(
               margin: EdgeInsets.all(4),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+                borderRadius: BorderRadius.all(Radius.circular(30)),
                 color: Color(0xfff1f3f6),
               ),
               child: Center(
@@ -184,10 +186,10 @@ class _HomePageState extends State<LawyerHomePage> {
                   margin: EdgeInsets.all(2),
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                    //image: AssetImage('assets/images/document.png'),
+                    image: AssetImage('$img'),
 
-                    image: NetworkImage(
-                        'https://www.computerhope.com/jargon/d/doc.png'),
+                    // image: NetworkImage(
+                    //     'https://www.computerhope.com/jargon/d/doc.png'),
                     fit: BoxFit.cover,
                   )),
                 ),
