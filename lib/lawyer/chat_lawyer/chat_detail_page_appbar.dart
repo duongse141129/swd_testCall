@@ -39,7 +39,7 @@ class ChatDetailPageAppBar extends StatelessWidget
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Đức Đặng",
+                      "Dương Đỗ",
                       style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
                     ),
                     SizedBox(
