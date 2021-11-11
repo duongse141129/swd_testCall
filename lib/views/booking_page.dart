@@ -9,8 +9,12 @@ import 'package:advisories_lawyer/provider/google_sign_in.dart';
 import 'package:advisories_lawyer/views/home_page.dart';
 import 'package:advisories_lawyer/views/main_customer.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class BookingPage extends StatefulWidget {
   late int lawyerID;
@@ -29,6 +33,10 @@ class BookingPage extends StatefulWidget {
 }
 
 class _BookingPageState extends State<BookingPage> {
+  static const platform = const MethodChannel("razorpay_flutter");
+  final user = FirebaseAuth.instance.currentUser!;
+
+  late Razorpay _razorpay;
   _BookingPageState(
       {required this.lawyerID,
       required this.lawyerName,
@@ -39,9 +47,20 @@ class _BookingPageState extends State<BookingPage> {
   late CustomerCase customerCase;
   late SlotDTO slotDto;
   late final Future<Users> userList;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
+
   @override
   void initState() {
     userList = getUsers();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
 
   DateTime date = DateTime.now();
@@ -224,10 +243,7 @@ class _BookingPageState extends State<BookingPage> {
                         //Future.delayed(Duration(seconds: 4), () => 'Waiting import customer case');
                         await NetworkRequest.updateSlot(slotDto.id, booking.id);
 
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CustomerMain()));
+                        openCheckout();
                       },
                       child: Text(
                         'Thanh toán',
@@ -272,5 +288,46 @@ class _BookingPageState extends State<BookingPage> {
         return const CircularProgressIndicator();
       },
     );
+  }
+
+  void openCheckout() async {
+    var options = {
+      'key': 'rzp_test_nWIFRH8ira4IQB',
+      'amount': slotDto.price * 100,
+      'name': '${user.displayName}',
+      'description': '${customerCase}',
+      'retry': {'enabled': true, 'max_count': 1},
+      'send_sms_hash': true,
+      'prefill': {'contact': '0363597619', 'email': '${user.email}'},
+      'external': {
+        'wallets': ['paytm']
+      }
+    };
+
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      debugPrint('Error: e');
+    }
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Fluttertoast.showToast(
+        msg: "PAYMENT SUCCESS", toastLength: Toast.LENGTH_SHORT);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => CustomerMain()));
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Fluttertoast.showToast(
+        msg: "ERROR: " + response.code.toString() + " - " + response.message!,
+        toastLength: Toast.LENGTH_SHORT);
+    print(response.code.toString());
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName!,
+        toastLength: Toast.LENGTH_SHORT);
   }
 }

@@ -19,7 +19,7 @@ class NetworkRequest {
   static const String urlCategory =
       'https://104.215.186.78/api/v1/categories?page_index=1&page_size=20';
   static const String urlSlot =
-      'https://104.215.186.78/api/v1/slots?page_index=1&page_size=5';
+      'https://104.215.186.78/api/v1/slots?page_index=1&page_size=20';
   static const String urlDocument =
       'https://104.215.186.78/api/v1/documents?page_index=1&page_size=10';
 
@@ -235,7 +235,8 @@ class NetworkRequest {
         'Accept': 'application/json',
         'Authorization': 'Bearer $idToken',
       },
-      body: jsonEncode(<String, dynamic>{"id": idSlot, "booking_id": bookingID}),
+      body:
+          jsonEncode(<String, dynamic>{"id": idSlot, "booking_id": bookingID}),
     );
 
     String body = response.body;

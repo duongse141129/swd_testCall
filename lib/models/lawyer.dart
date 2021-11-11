@@ -73,22 +73,22 @@ class Lawyer {
 
   factory Lawyer.fromJson(Map<String, dynamic> json) {
     return Lawyer(
-        id: json['id'] ?? '',
+        id: json['id'] ?? 0,
         name: json['name'] ?? '',
         email: json['email'] ?? '',
         address: json['address'] ?? '',
         location: json['location'] ?? '',
         description: json['description'] ?? '',
-        phoneNumber: json['phone_number'] ?? '',
-        website: json['website'] ?? '',
+        phoneNumber: json['phone_number'] ?? 'Chưa cập nhật',
+        website: json['website'] ?? 'Chưa cập nhật',
         sex: json['sex'] ?? '',
         dateOfBirth: json['date_of_birth'] ?? '',
-        status: json['status'] ?? '',
-        lawyerOfficeId: json['lawyer_office_id'] ?? '',
-        levelId: json['level_id'] ?? '',
-        dateOfBirthFormatted: json['date_of_birth_formatted'],
-        lawyerOfficeName: json['lawyer_office_name'],
-        level: json['level'],
+        status: json['status'] ?? 0,
+        lawyerOfficeId: json['lawyer_office_id'] ?? 0,
+        levelId: json['level_id'] ?? 0,
+        dateOfBirthFormatted: json['date_of_birth_formatted'] ?? '',
+        lawyerOfficeName: json['lawyer_office_name'] ?? '',
+        level: json['level'] ?? '',
         categoryIds: json['category_ids'].cast<int>());
   }
   @override

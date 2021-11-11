@@ -1,3 +1,4 @@
+import 'package:advisories_lawyer/provider/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -83,6 +84,38 @@ class _ProfileLawyerPageState extends State<ProfileLawyerPage> {
           ],
         ),
       ),
+    );
+  }
+
+  FutureBuilder<Users> buildFutureBuilder() {
+    return FutureBuilder<Users>(
+      future: getUsers(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Khách hàng: ",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    snapshot.data!.name.toString(),
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
     );
   }
 }
