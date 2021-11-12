@@ -22,17 +22,17 @@ class BookingPage extends StatefulWidget {
   CustomerCase customerCase;
   SlotDTO slotDto;
   late String questions;
-  
-  BookingPage(this.lawyerID, this.lawyerName, this.customerCase, this.slotDto, this.questions);
+
+  BookingPage(this.lawyerID, this.lawyerName, this.customerCase, this.slotDto,
+      this.questions);
 
   @override
   _BookingPageState createState() => _BookingPageState(
-        lawyerID: lawyerID,
-        lawyerName: lawyerName,
-        customerCase: customerCase,
-        slotDto: slotDto, 
-        questions: questions
-      );
+      lawyerID: lawyerID,
+      lawyerName: lawyerName,
+      customerCase: customerCase,
+      slotDto: slotDto,
+      questions: questions);
 }
 
 class _BookingPageState extends State<BookingPage> {
@@ -145,7 +145,7 @@ class _BookingPageState extends State<BookingPage> {
                             Text('    - ' + customerCase.description,
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 20)),
-                             Text(' Câu hỏi: ',
+                            Text(' Câu hỏi: ',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 20)),
                             Text('    - ' + questions,
@@ -188,16 +188,19 @@ class _BookingPageState extends State<BookingPage> {
                                           color: Colors.black, fontSize: 20)),
                                 ],
                               ),
-                              Column(
-                                children: [
-                                  Text('Luật sư: ',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                  Text(lawyerName.toString(),
-                                      style: TextStyle(
-                                          color: Colors.purpleAccent,
-                                          fontSize: 20)),
-                                ],
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text('Luật sư: ',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20)),
+                                    Text(lawyerName.toString(),
+                                        maxLines: 3,
+                                        style: TextStyle(
+                                            color: Colors.purpleAccent,
+                                            fontSize: 20)),
+                                  ],
+                                ),
                               )
                             ],
                           )
@@ -248,7 +251,7 @@ class _BookingPageState extends State<BookingPage> {
                         print(booking.toString());
                         booking = await NetworkRequest.createBooking(booking);
                         booking = await NetworkRequest.getBookingID(booking.id);
-                        
+
                         print("done infor" + booking.toString());
                         await NetworkRequest.createQuestion(booking, questions);
                         //Future.delayed(Duration(seconds: 4), () => 'Waiting import customer case');

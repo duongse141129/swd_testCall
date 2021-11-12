@@ -37,42 +37,185 @@ class _ProfileCustomerState extends State<ProfileCustomer> {
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Tên khách hàng: ${customerDTO?.name}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.account_circle_rounded,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Text(
+                    'Tên khách hàng: ${customerDTO?.name}',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Địa chỉ: ${customerDTO?.address}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.email,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Text(
+                    'Email: ${customerDTO?.email}',
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Thành phố: ${customerDTO?.location}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.phone,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Text(
+                      'Phone number: ${customerDTO?.phoneNumber == null ? "Chưa cập nhật" : "${customerDTO?.phoneNumber}"}',
+                      maxLines: 2,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
+                )
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Số điện thoại: ${customerDTO?.phoneNumber}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.home,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Text(
+                    'Địa chỉ: ${customerDTO?.address}',
+                    maxLines: 3,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Giới tính: ${customerDTO?.sex == 0 ? "nữ" : "nam"}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.location_city,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Text(
+                    'Thành phố: ${customerDTO?.location}',
+                    maxLines: 3,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.people,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Text(
+                    'Giới tính: ${customerDTO?.sex == 0 ? "nữ" : "nam"}',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

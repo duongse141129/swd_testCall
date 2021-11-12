@@ -81,7 +81,7 @@ class _DetailOfBookingState extends State<DetailOfBooking> {
             height: 10,
           ),
           Container(
-            height: 150,
+            height: 220,
             width: double.infinity,
             decoration: BoxDecoration(
                 border: Border.all(width: 1, color: Colors.grey.shade300),
@@ -113,39 +113,39 @@ class _DetailOfBookingState extends State<DetailOfBooking> {
                     fontSize: 15,
                   ),
                 ),
+                ElevatedButton(
+                  style: (ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                  )),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProfileLawyerInBooking(bookingDTO.lawyerId)));
+                  },
+                  child: Text(
+                    'Profile of Lawyer',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                  style: (ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                  )),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileOfCustomerCase(
+                                bookingDTO.customerCaseId, bookingDTO.id)));
+                  },
+                  child: Text(
+                    'Profile of CustomerCase',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ],
-            ),
-          ),
-          ElevatedButton(
-            style: (ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.blue),
-            )),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          ProfileLawyerInBooking(bookingDTO.lawyerId)));
-            },
-            child: Text(
-              'Profile of Lawyer',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          ElevatedButton(
-            style: (ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.blue),
-            )),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ProfileOfCustomerCase(
-                          bookingDTO.customerCaseId, bookingDTO.id)));
-            },
-            child: Text(
-              'Profile of CustomerCase',
-              style: TextStyle(color: Colors.white),
             ),
           ),
           Expanded(
@@ -164,17 +164,12 @@ class _DetailOfBookingState extends State<DetailOfBooking> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '${"Date: " + slotData[index].startAt.substring(0, 10)}',
+                                '${"Ngày hẹn: " + slotData[index].startAt.substring(0, 10)}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),
                               Text(
                                 '${"Time: " + slotData[index].startAt.substring(11, 16)}  - ${slotData[index].endAt.substring(11, 16)}',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black),
-                              ),
-                              Text(
-                                '${"Price: " + slotData[index].price.toString()}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),

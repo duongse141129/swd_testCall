@@ -55,12 +55,15 @@ class _ProfileLawyerInBookingState extends State<ProfileLawyerInBooking> {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'Lawyer: ${lawyerDTO?.name}',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    'Lawyer: ${lawyerDTO?.name}',
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -83,12 +86,15 @@ class _ProfileLawyerInBookingState extends State<ProfileLawyerInBooking> {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'Email: ${lawyerDTO?.email}',
-                  style: TextStyle(
-                      fontSize: 19,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    'Email: ${lawyerDTO?.email}',
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -111,12 +117,15 @@ class _ProfileLawyerInBookingState extends State<ProfileLawyerInBooking> {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                    'Phone number: ${lawyerDTO?.phoneNumber == null ? "Chưa cập nhật" : "${lawyerDTO?.phoneNumber}"}',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold))
+                Expanded(
+                  child: Text(
+                      'Phone number: ${lawyerDTO?.phoneNumber == null ? "Chưa cập nhật" : "${lawyerDTO?.phoneNumber}"}',
+                      maxLines: 2,
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
+                )
               ],
             ),
           ),
@@ -138,12 +147,15 @@ class _ProfileLawyerInBookingState extends State<ProfileLawyerInBooking> {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'Address: ${lawyerDTO?.address} - ${lawyerDTO?.location}',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    'Địa chỉ: ${lawyerDTO?.address} - ${lawyerDTO?.location}',
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -166,12 +178,15 @@ class _ProfileLawyerInBookingState extends State<ProfileLawyerInBooking> {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'Degree: ${lawyerDTO?.description}',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    'Degree: ${lawyerDTO?.description}',
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -194,12 +209,15 @@ class _ProfileLawyerInBookingState extends State<ProfileLawyerInBooking> {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'Office: ${lawyerDTO?.lawyerOfficeName}',
-                  style: TextStyle(
-                      fontSize: 19,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    'Office: ${lawyerDTO?.lawyerOfficeName}',
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
