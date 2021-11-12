@@ -9,6 +9,7 @@ import 'package:advisories_lawyer/lawyer/model_lawyer/customer_case.dart';
 import 'package:advisories_lawyer/lawyer/model_lawyer/document.dart';
 import 'package:advisories_lawyer/lawyer/model_lawyer/post.dart';
 import 'package:advisories_lawyer/lawyer/model_lawyer/slot.dart';
+import 'package:advisories_lawyer/models/advisory.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
@@ -235,6 +236,32 @@ class NetworkRequest {
     }
   }
 
+  static List<AdvisoryDTO> parseAdvisory(String responseBody) {
+    var list = json.decode(responseBody) as List<dynamic>;
+    List<AdvisoryDTO> advisories =
+        list.map((model) => AdvisoryDTO.fromJson(model)).toList();
+    return advisories;
+  }
+  static Future<AdvisoryDTO> fetachAdvisory(int bookingID,{int page = 1}) async {
+    final response = await http.get(Uri.parse('https://104.215.186.78/api/v1/advisories?BookingId=${bookingID}&pageIndex=1&pageSize=1'));
+    print("Advisory" +response.body);
+    String obj=response.body.substring(1,response.body.length-1);
+    print("Advisory2" +obj);
+    Map<String, dynamic> advisoryJSON = jsonDecode(obj);
+    AdvisoryDTO advisoryDTO = AdvisoryDTO.fromJson(advisoryJSON);
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print("connect dc r" +response.body);
+      return advisoryDTO;
+    } else if (response.statusCode == 404) {
+      print("Not found ");
+      throw Exception('Not Found');
+    } else {
+      print("Fail to connect");
+      throw Exception('Failed to get post');
+    }
+  }
+
   static Future<BookingDTO> fetachNameCusByBookingID(int bookingID,{int page = 1}) async {
     final response = await http.get(Uri.parse('https://104.215.186.78/api/v1/bookings/$bookingID'));
 
@@ -277,6 +304,36 @@ class NetworkRequest {
         throw Exception('Failed to create slot.');
       }
     
+  }
+
+  static Future<AdvisoryDTO> updateAnswer(AdvisoryDTO dto, String answers) async {
+
+
+    final response = await http.put(
+      Uri.parse('https://104.215.186.78/api/v1/advisories/${dto.id}'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "customer_id": dto.customerId,
+        "lawyer_id": dto.lawyerId,
+        "question": dto.question,
+        "answer": answers,
+        "booking_id": dto.bookingId
+      }),
+    );
+
+    Map<String, dynamic> advisoryJSON = jsonDecode(response.body);
+    print(advisoryJSON.toString());
+    AdvisoryDTO advisoryDTO = AdvisoryDTO.fromJson(advisoryJSON);
+    print("R:" + response.statusCode.toString());
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      print("update asnswer dc r");
+      return advisoryDTO;
+    } else {
+      throw Exception('Failed to create slot.');
+    }
   }
 
   /*Future<List<Post>> fetchProducts() async { 

@@ -19,11 +19,12 @@ class LawyerListSchedule extends StatefulWidget {
   late int lawyerID;
   late String lawyerName;
   late CustomerCase customerCase;
+  late String questions;
 
-  LawyerListSchedule(this.lawyerID, this.lawyerName, this.customerCase);
+  LawyerListSchedule(this.lawyerID, this.lawyerName, this.customerCase,this.questions);
   @override
   _LawyerListSheduleState createState() => _LawyerListSheduleState(
-      lawyerID: lawyerID, lawyerName: lawyerName, customerCase: customerCase);
+      lawyerID: lawyerID, lawyerName: lawyerName, customerCase: customerCase, questions: questions);
 }
 
 class _LawyerListSheduleState extends State<LawyerListSchedule> {
@@ -31,10 +32,12 @@ class _LawyerListSheduleState extends State<LawyerListSchedule> {
     required this.lawyerID,
     required this.lawyerName,
     required this.customerCase,
+    required this.questions
   });
   late int lawyerID;
   late String lawyerName;
   late CustomerCase customerCase;
+  late String questions;
   List<SlotDTO> slotData = <SlotDTO>[];
   @override
   void initState() {
@@ -148,7 +151,7 @@ class _LawyerListSheduleState extends State<LawyerListSchedule> {
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
                                 return BookingPage(lawyerID, lawyerName,
-                                    customerCase, slotData[index]);
+                                    customerCase, slotData[index], questions);
                               },
                             ));
                           } else {

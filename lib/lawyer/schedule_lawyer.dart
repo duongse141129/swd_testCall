@@ -177,6 +177,11 @@ class _SheduleState extends State<LawyerSchedule> {
                                           TextButton(
                                             onPressed: () {
                                               NetworkRequest.deleteSlot(slotData[index].id);
+                                              NetworkRequest.fetachSlot().then((dataFromSever) {
+                                                setState(() {
+                                                  slotData = dataFromSever;
+                                                });
+                                              });
                                               Navigator.pop( context);
                                             },
                                             child: const Text('OK'),

@@ -2,6 +2,7 @@ import 'package:advisories_lawyer/lawyer/infor_user.dart';
 import 'package:advisories_lawyer/models/booking.dart';
 import 'package:advisories_lawyer/models/network_lawyer/network_request.dart';
 import 'package:advisories_lawyer/views/call_page.dart';
+import 'package:advisories_lawyer/views/detail_booking_page.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -99,9 +100,25 @@ class _SheduleState extends State<CustomerSchedule> {
                                     fontSize: 16, color: Colors.black),
                               ),
                               Text(
-                                'Ngày đặt: ${bookingData[index].bookingDate.substring(0, 10)}',
+                                'Date booking: ${bookingData[index].bookingDate.substring(0, 10)}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
+                              ),
+                              ElevatedButton(
+                                style: (ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.blue),
+                                )),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DetailOfBooking(bookingData[index])));
+                                },
+                                child: Text(
+                                  'Detail',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               InkWell(
                                 child: Icon(

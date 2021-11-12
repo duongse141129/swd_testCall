@@ -37,6 +37,7 @@ class _CustomerCasePageState extends State<CustomerCasePage> {
 
   final TextEditingController _controllerTitle = TextEditingController();
   final TextEditingController _controllerDes = TextEditingController();
+  final TextEditingController _controllerQuestion = TextEditingController();
   Future<CustomerCase>? _futureCustomerCase;
 
   @override
@@ -110,6 +111,17 @@ class _CustomerCasePageState extends State<CustomerCasePage> {
           decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Mời bạn nhập chi tiết vấn đề mà bạn muốn giải quyết'),
+        ),
+        Text(
+          "Câu hỏi",
+          style: TextStyle(fontSize: 30),
+        ),
+        TextField(
+          maxLines: 6,
+          controller: _controllerQuestion,
+          decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Mời bạn nhập những thắc mắc về vấn đề của bạn'),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -185,11 +197,35 @@ class _CustomerCasePageState extends State<CustomerCasePage> {
               SizedBox(
                 height: 10,
               ),
+              Card(
+                child: Container(
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Câu hỏi: ",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        '  - ${_controllerQuestion.text}',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              SizedBox(
+                height: 10,
+              ),
               RaisedButton(
                 color: Colors.purple.shade400,
                 onPressed: () {
                   CustomerCase cusCase = CustomerCase(
-                      id: 0,
+                      id: snapshot.data!.id,
                       name: snapshot.data!.name,
                       description: snapshot.data!.description);
 
@@ -199,7 +235,7 @@ class _CustomerCasePageState extends State<CustomerCasePage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              LawyerListPage(doc.category_id, cusCase)));
+                              LawyerListPage(doc.category_id, cusCase, _controllerQuestion.text)));
                 },
                 child: Text(
                   "Chọn Luật sư",

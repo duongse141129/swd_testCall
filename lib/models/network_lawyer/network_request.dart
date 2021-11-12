@@ -6,9 +6,11 @@ import 'package:advisories_lawyer/lawyer/model_lawyer/category.dart';
 import 'package:advisories_lawyer/lawyer/model_lawyer/document.dart';
 import 'package:advisories_lawyer/lawyer/model_lawyer/post.dart';
 import 'package:advisories_lawyer/lawyer/model_lawyer/slot.dart';
+import 'package:advisories_lawyer/models/advisory.dart';
 import 'package:advisories_lawyer/models/booking.dart';
 
 import 'package:advisories_lawyer/models/customer_case.dart';
+import 'package:advisories_lawyer/models/lawyer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
@@ -147,8 +149,7 @@ class NetworkRequest {
     String name = cusCase.name.replaceAll(" ", "%20");
     String description = cusCase.description.replaceAll(" ", "%20");
 
-    final response = await http.get(Uri.parse(
-        'https://104.215.186.78/api/v1/customer-cases?name=${name}&description=${description}&page_index=1&page_size=100'));
+    final response = await http.get(Uri.parse('https://104.215.186.78/api/v1/customer-cases?name=${name}&description=${description}&page_index=1&page_size=100'));
 
     Map<String, dynamic> cusCaseMap = jsonDecode(response.body);
     CustomerCase customerCaseDTO = CustomerCase.fromJson(cusCaseMap);
@@ -206,7 +207,7 @@ class NetworkRequest {
     Booking bookingDTO = Booking.fromJson(bookingJSON);
     print("R:" + response.statusCode.toString());
     if (response.statusCode == 200) {
-      print("create CusCase dc r");
+      print("getid boooking dc r");
       return bookingDTO;
     } else {
       throw Exception('Failed to create slot.');
@@ -295,7 +296,120 @@ class NetworkRequest {
     }
   }
 
+  static Future<void> createQuestion(Booking dto, String questions) async {
+    final response = await http.post(
+      Uri.parse('https://104.215.186.78/api/v1/advisories'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "customer_id": InforUser.getIdUser(),
+        "lawyer_id": dto.lawyerId,
+        "question": questions,
+        "answer": "",
+        "booking_id": dto.id
+      }),
+    );
+    //https://104.215.186.78/api/v1/bookings/20
+    print(response.body.toString());
+    //Map<String, dynamic> bookingJSON = jsonDecode(response.body);
+    //print(bookingJSON.toString());
+    //AdvisoryDTO bookingDTO = AdvisoryDTO.fromJson(bookingJSON);
+    print("R:" + response.statusCode.toString());
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      print("create question dc r");
+    } else {
+      throw Exception('Failed to create slot.');
+    }
+  }
+
+  static Future<Lawyer> fetachProfileLawyer(int lawyerID,{int page = 1}) async {
+    final response = await http.get(Uri.parse('https://104.215.186.78/api/v1/lawyers/${lawyerID}'));
+
+    Map<String, dynamic> lawyerJSON = jsonDecode(response.body);
+    Lawyer lawyerDTO = Lawyer.fromJson(lawyerJSON);
+
+    if (response.statusCode == 200) {
+      print("connect dc r" +response.body);
+      return lawyerDTO;
+    } else if (response.statusCode == 404) {
+      print("Not found ");
+      throw Exception('Not Found');
+    } else {
+      print("Fail to connect");
+      throw Exception('Failed to get post');
+    }
+  }
+  static Future<CustomerCase> fetachCustomerCaseByIDcusCase(int customerCaseID,{int page = 1}) async {
+    final response = await http.get(Uri.parse('https://104.215.186.78/api/v1/customer-cases/$customerCaseID'));
+
+    Map<String, dynamic> cusCaseMap = jsonDecode(response.body);
+    CustomerCase customerCaseDTO = CustomerCase.fromJson(cusCaseMap);
+
+    if (response.statusCode == 200) {
+      print("connect dc r" +response.body);
+      return customerCaseDTO;
+    } else if (response.statusCode == 404) {
+      print("Not found ");
+      throw Exception('Not Found');
+    } else {
+      print("Fail to connect");
+      throw Exception('Failed to get post');
+    }
+  }
+
+  static List<AdvisoryDTO> parseAdvisory(String responseBody) {
+    var list = json.decode(responseBody) as List<dynamic>;
+    List<AdvisoryDTO> advisories =
+        list.map((model) => AdvisoryDTO.fromJson(model)).toList();
+    return advisories;
+  }
+  static Future<AdvisoryDTO> fetachAdvisory(int bookingID,{int page = 1}) async {
+    final response = await http.get(Uri.parse('https://104.215.186.78/api/v1/advisories?BookingId=${bookingID}&pageIndex=1&pageSize=1'));
+    print("Advisory" +response.body);
+    String obj=response.body.substring(1,response.body.length-1);
+    print("Advisory2" +obj);
+    Map<String, dynamic> advisoryJSON = jsonDecode(obj);
+    AdvisoryDTO advisoryDTO = AdvisoryDTO.fromJson(advisoryJSON);
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print("connect dc r" +response.body);
+      return advisoryDTO;
+    } else if (response.statusCode == 404) {
+      print("Not found ");
+      throw Exception('Not Found');
+    } else {
+      print("Fail to connect");
+      throw Exception('Failed to get post');
+    }
+  }
+
+  static Future<List<SlotDTO>> fetachSlotByBooingID(int bookingID,{int page = 1}) async {
+    var tokenOfUser = await FirebaseAuth.instance.currentUser!.getIdToken();
+    final response = await http.get(
+      Uri.parse('https://104.215.186.78/api/v1/slots?booking_id=${bookingID}&page_index=1&page_size=100'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $tokenOfUser',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print("connect dc r");
+      return compute(parseSlot, response.body);
+    } else if (response.statusCode == 404) {
+      print("Not found ");
+      throw Exception('Not Found');
+    } else {
+      print("Fail to connect");
+      throw Exception('Failed to get post');
+    }
+  }
+
   /*Future<List<Post>> fetchProducts() async { 
+    fetachProfileLawyer
    final response = await http.get('http://192.168.1.2:8000/products.json' as Uri); 
    if (response.statusCode == 200) { 
       return parseProducts(response.body); 

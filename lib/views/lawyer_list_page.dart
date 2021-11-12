@@ -13,20 +13,21 @@ import 'package:http/http.dart' as http;
 
 class LawyerListPage extends StatefulWidget {
   final int categoryID;
-
   final CustomerCase customerCase;
-  const LawyerListPage(this.categoryID, this.customerCase);
+  final String questions;
+  const LawyerListPage(this.categoryID, this.customerCase,this.questions);
 
   @override
   _LawyerPageState createState() =>
-      _LawyerPageState(categoryID: categoryID, customerCase: customerCase);
+      _LawyerPageState(categoryID: categoryID, customerCase: customerCase, questions: questions);
 }
 
 class _LawyerPageState extends State<LawyerListPage> {
   late Future<List<Lawyer>> futureLawyer;
   late final int categoryID;
   late final CustomerCase customerCase;
-  _LawyerPageState({required this.categoryID, required this.customerCase});
+  late final String questions ;
+  _LawyerPageState({required this.categoryID, required this.customerCase, required this.questions});
   @override
   void initState() {
     super.initState();
@@ -65,7 +66,7 @@ class _LawyerPageState extends State<LawyerListPage> {
                                       builder: (context) => LawyerListSchedule(
                                           lawyer[index].id,
                                           lawyer[index].name,
-                                          customerCase)));
+                                          customerCase, questions)));
                             },
                             child: Card(
                               child: ListTile(

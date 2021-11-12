@@ -94,6 +94,14 @@ class _ProfileBooking extends State<ProfileBooking> {
                                 height: 5,
                               ),
                               Text(
+                                'Booking: ${bookingData[index].id}',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
                                 'ngày book: ${bookingData[index].bookingDate.substring(0, 10)}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
@@ -129,9 +137,7 @@ class _ProfileBooking extends State<ProfileBooking> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ProfileOfCustomerCase(
-                                                  bookingData[index]
-                                                      .customerCaseId)));
+                                              ProfileOfCustomerCase(bookingData[index].customerCaseId, bookingData[index].id)));
                                 },
                                 child: Text(
                                   'tài liệu vụ án',

@@ -21,14 +21,17 @@ class BookingPage extends StatefulWidget {
   late String lawyerName;
   CustomerCase customerCase;
   SlotDTO slotDto;
-  BookingPage(this.lawyerID, this.lawyerName, this.customerCase, this.slotDto);
+  late String questions;
+  
+  BookingPage(this.lawyerID, this.lawyerName, this.customerCase, this.slotDto, this.questions);
 
   @override
   _BookingPageState createState() => _BookingPageState(
         lawyerID: lawyerID,
         lawyerName: lawyerName,
         customerCase: customerCase,
-        slotDto: slotDto,
+        slotDto: slotDto, 
+        questions: questions
       );
 }
 
@@ -41,11 +44,13 @@ class _BookingPageState extends State<BookingPage> {
       {required this.lawyerID,
       required this.lawyerName,
       required this.customerCase,
-      required this.slotDto});
+      required this.slotDto,
+      required this.questions});
   late String lawyerName;
   late int lawyerID;
   late CustomerCase customerCase;
   late SlotDTO slotDto;
+  late String questions;
   late final Future<Users> userList;
 
   @override
@@ -140,6 +145,12 @@ class _BookingPageState extends State<BookingPage> {
                             Text('    - ' + customerCase.description,
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 20)),
+                             Text(' Câu hỏi: ',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20)),
+                            Text('    - ' + questions,
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20)),
                           ],
                         ),
                       ),
@@ -214,12 +225,10 @@ class _BookingPageState extends State<BookingPage> {
                       )),
                       onPressed: () async {
                         //var
-                        CustomerCase cusCase =
-                            await NetworkRequest.createCustomerCase(
-                                customerCase);
+                        //CustomerCase cusCase =await NetworkRequest.createCustomerCase(customerCase);
                         Future.delayed(Duration(seconds: 4),
                             () => 'Waiting import customer case');
-                        print("is CS" + cusCase.toString());
+                        print("is CS" + customerCase.toString());
                         //var inputFormat = DateFormat('dd/MM/yyyy HH:mm');
                         final df = new DateFormat('dd/MM/yyyy');
                         String dateTo = df.format(date);
@@ -234,12 +243,14 @@ class _BookingPageState extends State<BookingPage> {
                             totalPrice: slotDto.price,
                             payDate: dateTo,
                             status: 1,
-                            customerCaseId: cusCase.id);
+                            customerCaseId: customerCase.id);
 
                         print(booking.toString());
                         booking = await NetworkRequest.createBooking(booking);
                         booking = await NetworkRequest.getBookingID(booking.id);
+                        
                         print("done infor" + booking.toString());
+                        await NetworkRequest.createQuestion(booking, questions);
                         //Future.delayed(Duration(seconds: 4), () => 'Waiting import customer case');
                         await NetworkRequest.updateSlot(slotDto.id, booking.id);
 

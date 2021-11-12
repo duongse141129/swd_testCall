@@ -152,11 +152,38 @@ class _AddSlotState extends State<AddSlotTask> {
                       price: int.parse(inputController.text));
                   print(slotDTO.toString());
                   NetworkRequest.createSlot(slotDTO);
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text('Thông báo '),
+                      content:
+                          const Text('Tạo slot task thành công'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+
+                  //Navigator.pop(context);
+                  //Navigator.push(context,
+                  //   MaterialPageRoute(builder: (context) => LawyerMain()));
+                },
+                child: Text(
+                  "Create slot task",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.deepPurple[600],
+              ),
+              RaisedButton(
+                onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LawyerMain()));
                 },
                 child: Text(
-                  "Create Task",
+                  "Home",
                   style: TextStyle(color: Colors.white),
                 ),
                 color: Colors.deepPurple[600],
@@ -183,8 +210,8 @@ class _AddSlotState extends State<AddSlotTask> {
       print("Gio sang " + timeToChange);
       result = timeToChange.split(' ')[0];
       int hour = int.parse(timeToChange.split(':')[0]);
-      if(hour < 10){
-        return "0"+result;
+      if (hour < 10) {
+        return "0" + result;
       }
       return result;
     }
