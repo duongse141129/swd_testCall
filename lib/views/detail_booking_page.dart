@@ -43,31 +43,78 @@ class _DetailOfBookingState extends State<DetailOfBooking> {
           SizedBox(
             height: 20,
           ),
-          Text(
-            'ID book: ${bookingDTO.id}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            child: Row(
+              children: [
+                Container(
+                  width: 15,
+                  height: 10,
+                  decoration: BoxDecoration(
+                      color: Colors.orange,
+                      borderRadius: BorderRadius.horizontal(
+                        right: Radius.circular(5),
+                      )),
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width - 60,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RichText(
+                          text: TextSpan(
+                              text:
+                                  "Ngày đặt: ${bookingDTO.bookingDate.substring(0, 10)}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                              children: [])),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
-          Text(
-            'Ngày đặt: ${bookingDTO.bookingDate}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            'Giá: ${bookingDTO.totalPrice}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            'Luật sư: ${bookingDTO.lawyerName}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            height: 150,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                border: Border.all(width: 1, color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(20)),
+            margin: EdgeInsets.only(right: 10, left: 30),
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Booking ID: ${bookingDTO.id}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "     + Có hẹn với luật sư: ${bookingDTO.lawyerName}",
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
+                Text(
+                  "     + Giá: ${bookingDTO.totalPrice}",
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
           ),
           ElevatedButton(
             style: (ButtonStyle(
@@ -90,11 +137,11 @@ class _DetailOfBookingState extends State<DetailOfBooking> {
               backgroundColor: MaterialStateProperty.all(Colors.blue),
             )),
             onPressed: () {
-             Navigator.push(
+              Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          ProfileOfCustomerCase(bookingDTO.customerCaseId, bookingDTO.id)));
+                      builder: (context) => ProfileOfCustomerCase(
+                          bookingDTO.customerCaseId, bookingDTO.id)));
             },
             child: Text(
               'Profile of CustomerCase',
@@ -117,18 +164,17 @@ class _DetailOfBookingState extends State<DetailOfBooking> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '${"Date: "+slotData[index].startAt.substring(0,10)}',
+                                '${"Date: " + slotData[index].startAt.substring(0, 10)}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),
                               Text(
-                                '${"Time: "+slotData[index].startAt.substring(11,16)}  - ${slotData[index].endAt.substring(11,16)}',
+                                '${"Time: " + slotData[index].startAt.substring(11, 16)}  - ${slotData[index].endAt.substring(11, 16)}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),
-      
                               Text(
-                                '${"Price: "+slotData[index].price.toString()}',
+                                '${"Price: " + slotData[index].price.toString()}',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),
@@ -137,16 +183,12 @@ class _DetailOfBookingState extends State<DetailOfBooking> {
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
                               ),
-             
-
-                              
                             ],
                           ),
                         ),
                       ),
                     );
                   }))
-          
         ],
       ),
     );

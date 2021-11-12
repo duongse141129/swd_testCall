@@ -3,11 +3,10 @@ import 'package:advisories_lawyer/models/customer_case.dart';
 import 'package:advisories_lawyer/models/network_lawyer/network_request.dart';
 import 'package:flutter/material.dart';
 
-
 class ProfileOfCustomerCase extends StatefulWidget {
   final int customerCaseID;
   final int bookingID;
-  ProfileOfCustomerCase(this.customerCaseID,this.bookingID);
+  ProfileOfCustomerCase(this.customerCaseID, this.bookingID);
 
   @override
   _ProfileOfCustomerCaseState createState() => _ProfileOfCustomerCaseState();
@@ -17,21 +16,23 @@ class _ProfileOfCustomerCaseState extends State<ProfileOfCustomerCase> {
   CustomerCase? customerCase;
   AdvisoryDTO? advisoryDTO;
   final TextEditingController _controllerAnswer = TextEditingController();
-  String answerOfLawyer="";
+  String answerOfLawyer = "";
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    NetworkRequest.fetachCustomerCaseByIDcusCase(widget.customerCaseID).then((dataCustomerCaseFromSever) {
+    NetworkRequest.fetachCustomerCaseByIDcusCase(widget.customerCaseID)
+        .then((dataCustomerCaseFromSever) {
       setState(() {
         customerCase = dataCustomerCaseFromSever;
       });
     });
-    NetworkRequest.fetachAdvisory(widget.bookingID).then((dataAdvisoryFromSever) {
+    NetworkRequest.fetachAdvisory(widget.bookingID)
+        .then((dataAdvisoryFromSever) {
       setState(() {
         advisoryDTO = dataAdvisoryFromSever;
-        _controllerAnswer.text=advisoryDTO!.answer;
+        _controllerAnswer.text = advisoryDTO!.answer;
       });
     });
   }
@@ -41,14 +42,14 @@ class _ProfileOfCustomerCaseState extends State<ProfileOfCustomerCase> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile Customer ${widget.customerCaseID}"),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.purple.shade400,
       ),
       body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Container(
-            child: Column(
-              children: [
-                Card(
+              child: Column(
+            children: [
+              Card(
                 child: Container(
                   width: double.infinity,
                   child: Column(
@@ -137,9 +138,8 @@ class _ProfileOfCustomerCaseState extends State<ProfileOfCustomerCase> {
                   ),
                 ),
               ),
-              ],
-            )
-          )),
+            ],
+          ))),
     );
   }
 

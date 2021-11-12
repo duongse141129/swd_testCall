@@ -7,13 +7,14 @@ class ProfileLawyerInBooking extends StatefulWidget {
   const ProfileLawyerInBooking(this.lawyerID);
 
   @override
-  _ProfileLawyerInBookingState createState() => _ProfileLawyerInBookingState(lawyerID: lawyerID);
+  _ProfileLawyerInBookingState createState() =>
+      _ProfileLawyerInBookingState(lawyerID: lawyerID);
 }
 
 class _ProfileLawyerInBookingState extends State<ProfileLawyerInBooking> {
   late final int lawyerID;
   _ProfileLawyerInBookingState({required this.lawyerID});
-   Lawyer? lawyerDTO;
+  Lawyer? lawyerDTO;
 
   @override
   void initState() {
@@ -39,66 +40,197 @@ class _ProfileLawyerInBookingState extends State<ProfileLawyerInBooking> {
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Lawyer: ${lawyerDTO?.name}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.account_circle_rounded,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Lawyer: ${lawyerDTO?.name}',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Email: ${lawyerDTO?.email}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.email,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Email: ${lawyerDTO?.email}',
+                  style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Phone number: ${lawyerDTO?.phoneNumber}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.phone,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                    'Phone number: ${lawyerDTO?.phoneNumber == null ? "Chưa cập nhật" : "${lawyerDTO?.phoneNumber}"}',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold))
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Address: ${lawyerDTO?.address} - ${lawyerDTO?.location}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.home,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Address: ${lawyerDTO?.address} - ${lawyerDTO?.location}',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Decription: ${lawyerDTO?.description}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.school,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Degree: ${lawyerDTO?.description}',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Phonenumber: ${lawyerDTO?.phoneNumber}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.class_,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Office: ${lawyerDTO?.lawyerOfficeName}',
+                  style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Office: ${lawyerDTO?.lawyerOfficeName}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            'Level: ${lawyerDTO?.level}',
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.purple,
+                  size: 30,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Level: ${lawyerDTO?.level}',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 5,
